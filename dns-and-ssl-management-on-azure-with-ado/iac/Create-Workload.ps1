@@ -93,7 +93,7 @@ process {
             --vault-name $spnMetadataKeyvaultName 
 
         Write-Host "Assigning Owner role to SPN $spnName ($clientId) at $resourceGroupName scope"
-        az role assignment create --assignee $clientId -g $resourceGroupName --subscription $subscriptionId --role Owner --only-show-errors --output none
+        az role assignment create --assignee $clientId --role Owner --only-show-errors --output none --scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName" --only-show-errors --output none
 
         Write-Host "Creating new Azure DevOps Service Connection $serviceConnectionName in $DevOpsProject project under $azureDevOpsOrganization organization"
         $env:AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY = $clientSecret
